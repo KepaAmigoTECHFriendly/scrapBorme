@@ -89,7 +89,7 @@ N_lectura_borme <- function(municipio, radio, provincias, fecha = Sys.Date()){
       print(fecha_borme)
       print(provincia)
 
-      retorno <- lectura_borme_municipio(url, municipio, radio_ref, provincia, fecha_borme)
+      retorno <- scrapBorme::lectura_borme_municipio(url, municipio, radio_ref, provincia, fecha_borme)
     }
 
   },error = function(e){
@@ -104,6 +104,9 @@ N_lectura_borme <- function(municipio, radio, provincias, fecha = Sys.Date()){
            },
            "No se encuentran las provincias especificadas en el Borme de hoy"={
              error_plataforma <- '{"ERROR": "NO SE ENCUENTRAN LAS PROVINCIAS ESPECIFICADAS PARA LA FECHA DE HOY"}'
+           },
+           {
+             error_plataforma <- '{"ERROR"}'
            }
     )
 

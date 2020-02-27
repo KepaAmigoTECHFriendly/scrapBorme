@@ -92,7 +92,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   docs <- na.omit(docs)
 
   ##Nombre de las empresas
-  `EMPRESA` <-sub("\\.\n.*", "", docs)
+  `EMPRESA` <-sub("\\.\r\n.*", "", docs)
 
   ##Numero de registros realizados
   total_docs<-length(EMPRESA)
@@ -483,5 +483,5 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
     POST(url=TB_url,body=json_envio_plataforma)
   }
 
-  return(tsi)
+  return(json_borme_return)
 }
