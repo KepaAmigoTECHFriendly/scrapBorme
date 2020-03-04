@@ -79,7 +79,8 @@ lectura_borme <- function(url=""){
   ##Numero de registros realizados
   var_total_docs<-length(EMPRESA)
   docs<-docs%>%tolower()
-  docs<-docs%>%gsub("cve: (.*)","",.)
+  #docs<-docs%>%gsub("cve: (.*)","",.)
+  docs<-docs%>%gsub("cve: borme-a-2020-33-39\r\n","",.)%>%gsub("verificable en https://www.boe.es\r\n","",.)
 
   docs<-docs%>%gsub("\"","",.)
   docs<-str_replace_all(docs,"nombramientos","NOMBRAMIENTOS")

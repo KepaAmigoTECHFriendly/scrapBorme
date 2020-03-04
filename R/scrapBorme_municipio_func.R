@@ -98,7 +98,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   ##Numero de registros realizados
   total_docs<-length(EMPRESA)
   docs<-docs%>%tolower()
-  docs<-docs%>%gsub("cve: (.*)","",.)
+  #docs<-docs%>%gsub("cve: (.*)","",.)
+  docs<-docs%>%gsub("cve: borme-a-2020-33-39\r\n","",.)%>%gsub("verificable en https://www.boe.es\r\n","",.)
 
   docs<-docs%>%gsub("\"","",.)
   docs<-str_replace_all(docs,"nombramientos","NOMBRAMIENTOS")
@@ -226,6 +227,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
 
   CONSTITUCION<-data.frame(Const_comienzo_operaciones,Const_objeto_social,Const_domicilio,
                              Const_capital,stringsAsFactors=FALSE)
+
+  return(CONSTITUCION)
 
   ###CAMBIO DENOMINACIÓN SOCIAL
   cambioDenominacionSocial<-str_extract(docs,"CAMBIO DE DENOMINACIÓN SOCIAL.*?[A-Z]")%>%gsub("[A-Z]$","",.)
