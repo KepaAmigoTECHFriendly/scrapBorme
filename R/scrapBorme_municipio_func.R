@@ -229,8 +229,6 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   CONSTITUCION<-data.frame(Const_comienzo_operaciones,Const_objeto_social,Const_domicilio,
                              Const_capital,stringsAsFactors=FALSE)
 
-  return(CONSTITUCION)
-
   ###CAMBIO DENOMINACIÓN SOCIAL
   cambioDenominacionSocial<-str_extract(docs,"CAMBIO DE DENOMINACIÓN SOCIAL.*?[A-Z]")%>%gsub("[A-Z]$","",.)
   Cambio_denominacion_social<-cambioDenominacionSocial
