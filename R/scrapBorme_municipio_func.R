@@ -92,7 +92,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   docs <- na.omit(docs)
 
   ##Nombre de las empresas
-  `EMPRESA` <-sub('\\.\r\n.*', '', docs)
+  #`EMPRESA` <-sub('\\.\r\n.*', '', docs)
+  `EMPRESA` <-sub('\\.\n.*', '', docs)
 
   return(EMPRESA)
 
