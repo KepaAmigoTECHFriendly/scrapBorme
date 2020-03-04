@@ -99,8 +99,9 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   total_docs<-length(EMPRESA)
   docs<-docs%>%tolower()
   #docs<-docs%>%gsub("cve: (.*)","",.)
+
+  docs<-docs%>%gsub("cve: borme.* ","",.)%>%gsub("verificable en https://www.boe.es\n","",.)
   return(docs)
-  docs<-docs%>%gsub("cve: .*\n ","",.)%>%gsub("verificable en https://www.boe.es\n","",.)
 
 
   docs<-docs%>%gsub("\"","",.)
