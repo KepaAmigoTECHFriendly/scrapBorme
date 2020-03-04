@@ -95,8 +95,6 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   #`EMPRESA` <-sub('\\.\r\n.*', '', docs)
   `EMPRESA` <-sub('\\.\n.*', '', docs)
 
-  return(EMPRESA)
-
   ##Numero de registros realizados
   total_docs<-length(EMPRESA)
   docs<-docs%>%tolower()
@@ -467,6 +465,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   #write_json(BBDD,paste('C:\\TechFriendly\\IZARRA\\Borme\\paquete_borme\\',paste(nombreArchivo,".json",collapse=""),collapse=""),pretty=T)
 
   json_borme_return <- toJSON(data,pretty=T)
+
+  return(json_borme_return)
 
   #Extracción timestamp en formato unix
   tsi <- format(as.numeric(anytime(fecha_borme))*1000,scientific = F)
