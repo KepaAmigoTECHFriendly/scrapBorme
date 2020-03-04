@@ -37,7 +37,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   provincia <- provincia
 
   #Envío JSON a plataforma
-  TB_token <- "GNRFDNuaJraENdmzEmns"
+  TB_token <- "0SLu3GKDJtCKlLF1aPgt"
   TB_url   <- paste("http://94.130.77.253:8080/api/v1/",TB_token,"/telemetry",sep="")
 
   pos_puntos <- gregexpr(pattern = "[[:punct:]]+",text = url)
@@ -465,8 +465,6 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   #write_json(BBDD,paste('C:\\TechFriendly\\IZARRA\\Borme\\paquete_borme\\',paste(nombreArchivo,".json",collapse=""),collapse=""),pretty=T)
 
   json_borme_return <- toJSON(data,pretty=T)
-
-  return(json_borme_return)
 
   #Extracción timestamp en formato unix
   tsi <- format(as.numeric(anytime(fecha_borme))*1000,scientific = F)

@@ -74,7 +74,7 @@ lectura_borme <- function(url=""){
   docs <- na.omit(docs)
 
   ##Nombre de las empresas
-  `EMPRESA` <-sub("\\.\n.*", "", docs)
+  `EMPRESA` <-sub('\\.\n.*', '', docs)
 
   ##Numero de registros realizados
   var_total_docs<-length(EMPRESA)
@@ -304,7 +304,7 @@ lectura_borme <- function(url=""){
   json_borme <- toJSON(data,pretty=T)
 
   #Envío JSON a plataforma
-  TB_token <- "GNRFDNuaJraENdmzEmns"
+  TB_token <- "0SLu3GKDJtCKlLF1aPgt"
   TB_url   <- paste("http://94.130.77.253:8080/api/v1/",TB_token,"/telemetry",sep="")
   POST(url=TB_url,body=json_borme)
 

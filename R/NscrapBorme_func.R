@@ -45,7 +45,7 @@ N_lectura_borme <- function(municipio, radio, provincias, fecha = Sys.Date()){
   url_fecha <- paste(url_general,fecha_borme, sep = "")
 
   #Envío JSON a plataforma
-  TB_token <- "GNRFDNuaJraENdmzEmns"
+  TB_token <- "0SLu3GKDJtCKlLF1aPgt"
   TB_url   <- paste("http://94.130.77.253:8080/api/v1/",TB_token,"/telemetry",sep="")
 
   #Manejo de errores
