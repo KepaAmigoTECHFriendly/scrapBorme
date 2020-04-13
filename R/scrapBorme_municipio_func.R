@@ -124,7 +124,24 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   docs<-str_replace_all(docs,"reducción de capital","REDUCCIÓN DE CAPITAL")
   docs<-str_replace_all(docs,"fusión por absorción","FUSIÓN POR ABSORCIÓN")
   docs<-str_replace_all(docs,"cambio de denominación social","CAMBIO DE DENOMINACIÓN SOCIAL")
+  docs<-str_replace_all(docs,"situación concursal","SITUACIÓN CONCURSAL")
   docs<-docs%>%str_squish()
+
+
+  ##SITUACIÓN CONCURSAL
+  situacion_concursal<-str_extract(docs,"SITUACIÓN CONCURSAL.*?[A-Z]")%>%gsub("[A-Z]$","",.)
+
+  Sit_conc_procedimiento <- situacion_concursal %>% str_extract("procedimiento concursal.*?\\.")%>%gsub("procedimiento concursal","",.)
+  Sit_conc_firme <- situacion_concursal %>% str_extract("firme.*?\\,")%>%gsub("firme:","",.)%>%gsub(",","",.)
+  Sit_conc_fecha_resolucion <- situacion_concursal %>% str_extract("fecha de resolución.*?\\.")%>%gsub("fecha de resolución","",.)
+  Sit_conc_proceso <- situacion_concursal %>% str_extract("sit_conc_firme.*?\\.")%>%gsub("sit_conc_firme","",.)
+  Sit_conc_juzgado <- situacion_concursal %>% str_extract("juzgado: num..*?\\.")%>%gsub("juzgado:","",.)
+  Sit_conc_juez <- situacion_concursal %>% str_extract("juez.*?\\.")%>%gsub("juez:","",.)
+  Sit_conc_resoluciones <- situacion_concursal %>% str_extract("resoluciones.*?\\.")%>%gsub("resoluciones:","",.)
+
+  `SITUACIÓN CONCURSAL` <- data.frame(Sit_conc_procedimiento, Sit_conc_firme, Sit_conc_fecha_resolucion, Sit_conc_proceso, Sit_conc_juzgado, Sit_conc_juez, Sit_conc_resoluciones,
+                                      stringsAsFactors = F)
+
 
   ##NOMBRAMIENTOS
   nombramientos<-str_extract(docs,"NOMBRAMIENTOS.*?[A-Z]")%>%gsub("[A-Z]$","",.)
@@ -303,7 +320,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
 
   data<-data.frame(EMPRESA,Fusion_sociedades_absorbidas,Modificaciones_estatutarias,Cambio_denominacion_social,Cambio_domicilio_social,
                    Cambio_objeto_social,CESES,NOMBRAMIENTOS,`AMPLIACION CAPITAL`,Declaracion_unipersonalidad,
-                   `REDUCCION CAPITAL`,REELECCIONES,REVOCACIONES,Disolucion,Extincion,CONSTITUCION,Otros_conceptos,Datos_registrales,stringsAsFactors=FALSE)
+                   `REDUCCION CAPITAL`,REELECCIONES,REVOCACIONES,`SITUACIÓN CONCURSAL`,Disolucion,Extincion,CONSTITUCION,Otros_conceptos,Datos_registrales,stringsAsFactors=FALSE)
   s<-0
   ncol<-ncol(data)
   BBDD<-data.frame(EMPRESA,stringsAsFactors=F)

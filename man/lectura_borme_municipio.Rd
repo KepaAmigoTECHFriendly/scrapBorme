@@ -17,6 +17,6 @@ Scrapea el Borme en PDF de la provincia especificada, en base a un minicipio de 
  devuelve un json con con los campos reflejados por empresa en el borme y lo envía a la plataforma Smart City.
 }
 \examples{
- lectura_borme_municipio('https://www.boe.es/borme/dias/2019/01/17/pdfs/BORME-A-2019-11-48.pdf', 'Ermua', 30, 'Bizkaia')
+ lectura_borme_municipio('https://www.boe.es/borme/dias/2019/01/17/pdfs/BORME-A-2019-11-48.pdf', 'Ermua', 30, 'Bizkaia', "2019-12-19")
 
 }
