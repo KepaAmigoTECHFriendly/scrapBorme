@@ -324,7 +324,7 @@ N_lectura_borme_fechas <- function(municipio, radio, provincias, fecha = Sys.Dat
         constitucion<-str_extract(docs,"CONSTITUCIÓN.*?[A-Z]")%>%gsub("[A-Z]$","",.)
 
         Const_comienzo_operaciones<-constitucion%>%str_extract("comienzo de operaciones.*?\\. ")%>%gsub("comienzo de operaciones:","",.)
-        Const_objeto_social<-constitucion%>%str_extract("objeto social.*?\\.")%>%gsub("objeto social:","",.)
+        Const_objeto_social<-constitucion%>%str_extract("objeto social.*?\\. domicilio")%>%gsub("objeto social:","",.)
         Const_domicilio<-constitucion%>%str_extract("domicilio.*?\\)")%>%gsub("domicilio:","",.) %>% str_trim()
         Const_capital<-constitucion%>%str_extract("capital.*?euros\\.")%>%gsub("capital:","",.)
 

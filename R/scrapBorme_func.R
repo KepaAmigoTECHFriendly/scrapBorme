@@ -198,7 +198,7 @@ lectura_borme <- function(url=""){
   var_constitucion<-str_extract(docs,"CONSTITUCIÓN.*?[A-Z]")%>%gsub("[A-Z]$","",.)
 
   var_constitucion_comienzoOperaciones<-var_constitucion%>%str_extract("comienzo de operaciones.*?\\. ")%>%gsub("comienzo de operaciones:","",.)
-  var_constitucion_objetoSocial<-var_constitucion%>%str_extract("objeto social.*?\\.")%>%gsub("objeto social:","",.)
+  var_constitucion_objetoSocial<-var_constitucion%>%str_extract("objeto social.*?\\. domicilio")%>%gsub("objeto social:","",.)
   var_constitucion_domicilio<-var_constitucion%>%str_extract("domicilio.*?\\)")%>%gsub("domicilio:","",.)
   var_constitucion_capital<-var_constitucion%>%str_extract("capital.*?euros\\.")%>%gsub("capital:","",.)
 
