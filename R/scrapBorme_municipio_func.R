@@ -37,8 +37,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   provincia <- provincia
 
   #Envío JSON a plataforma
-  TB_token <- "7n28gxvvzyrEBoqLImjz"
-  TB_url   <- paste("http://94.130.77.253:8080/api/v1/",TB_token,"/telemetry",sep="")
+  TB_token <- "5tdXJkEmtU8r0glK83fv"
+  TB_url   <- paste("http://78.47.39.122:8080/api/v1/",TB_token,"/telemetry",sep="")
 
   pos_puntos <- gregexpr(pattern = "[[:punct:]]+",text = url)
   pos_barras <- gregexpr(pattern = "[/]+",text = url)
@@ -92,8 +92,9 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   docs <- na.omit(docs)
 
   ##Nombre de las empresas
-  #`EMPRESA` <-sub('\\.\r\n.*', '', docs)
-  `EMPRESA` <-sub('\\.\n.*', '', docs)
+  `EMPRESA` <-sub('\\.\r\n.*', '', docs)
+  #`EMPRESA` <-sub('\\.\n.*', '', docs)
+
 
   ##Numero de registros realizados
   total_docs<-length(EMPRESA)
@@ -356,7 +357,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   #Endpoint geocoder API
   geocoder_endpoint <- "https://geocoder.api.here.com/6.2/geocode.json?app_id=HRwFz9rfbtRq63qGH4ZQ&app_code=aMRd84WGRs4h1591F-g82w&searchtext="
 
-  coordenadas_ref_municipio <- fromJSON(paste(geocoder_endpoint,municipio,"%20(Espa%C3%B1a)",sep = ""))
+  coordenadas_ref_municipio <- jsonlite::fromJSON(paste(geocoder_endpoint,URLencode(municipio),"%20(Espa%C3%B1a)",sep = ""))
   coordenadas_ref_municipio <- coordenadas_ref_municipio$Response$View$Result %>% as.data.frame()
   longitud_ref_municipio <- coordenadas_ref_municipio$Location$DisplayPosition$Longitude
   latitud_ref_municipio <- coordenadas_ref_municipio$Location$DisplayPosition$Latitude
@@ -382,7 +383,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
       domicilio <- gsub(" ","%20",domicilio)
       domicilio <- iconv(domicilio,from="UTF-8",to="ASCII//TRANSLIT")
 
-      coordenadas_domicilios <- fromJSON(paste(geocoder_endpoint, domicilio,sep=""))
+      coordenadas_domicilios <- jsonlite::fromJSON(paste(geocoder_endpoint, domicilio,sep=""))
       coordenadas_domicilios <- coordenadas_domicilios$Response$View$Result %>% as.data.frame()
 
       if(is.na(domicilio) | is.null(coordenadas_domicilios$Location$DisplayPosition$Longitude[1])){
@@ -494,7 +495,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
     ts <- as.numeric(tsi) +i  #Añade i ms al timestamp para poder verse sin solapamiento en el widget de la plataforma smart city.
 
     #Creación de JSON noticias y eliminación de ][ para cumplir con el formato json con modificación de timestamp de thingsboard.
-    json_borme <- toJSON(data[i,],pretty=T)
+    json_borme <- jsonlite::toJSON(data[i,],pretty=T)
     json_borme <- sub("[[]","",json_borme)
     json_borme <- sub("[]]","",json_borme)
 
