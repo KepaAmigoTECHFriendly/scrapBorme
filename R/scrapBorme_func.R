@@ -305,7 +305,7 @@ lectura_borme <- function(url=""){
   json_borme <- toJSON(data,pretty=T)
 
   #Envío JSON a plataforma
-  TB_token <- "5tdXJkEmtU8r0glK83fv"
+  TB_token <- "HIi1pBL69XZs96fjlT6u"
   TB_url   <- paste("http://78.47.39.122:8080/api/v1/",TB_token,"/telemetry",sep="")
   POST(url=TB_url,body=json_borme)
 

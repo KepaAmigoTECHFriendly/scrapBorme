@@ -37,7 +37,7 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   provincia <- provincia
 
   #Envío JSON a plataforma
-  TB_token <- "5tdXJkEmtU8r0glK83fv"
+  TB_token <- "HIi1pBL69XZs96fjlT6u"
   TB_url   <- paste("http://78.47.39.122:8080/api/v1/",TB_token,"/telemetry",sep="")
 
   pos_puntos <- gregexpr(pattern = "[[:punct:]]+",text = url)
@@ -92,8 +92,8 @@ lectura_borme_municipio <- function(url, municipio, radio, provincia, fecha_borm
   docs <- na.omit(docs)
 
   ##Nombre de las empresas
-  `EMPRESA` <-sub('\\.\r\n.*', '', docs)
-  #`EMPRESA` <-sub('\\.\n.*', '', docs)
+  #`EMPRESA` <-sub('\\.\r\n.*', '', docs)
+  `EMPRESA` <-sub('\\.\n.*', '', docs)
 
 
   ##Numero de registros realizados
