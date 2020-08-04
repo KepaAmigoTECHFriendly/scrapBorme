@@ -465,11 +465,10 @@ N_lectura_borme_fechas <- function(municipio, radio, provincias, fecha = Sys.Dat
         for(k in 1:length(variables_domicilio)){
           for(i in 1:length(data[,grep(variables_domicilio[k],names(data))])){
             domicilio <- stripWhitespace(data[,grep(variables_domicilio[k],names(data))][i])
-            print(domicilio)
-            #domicilio <- gsub(" ","%20",domicilio)
-            #domicilio <- iconv(domicilio,from="UTF-8",to="ASCII//TRANSLIT")
+            domicilio <- gsub(" ","%20",domicilio)
+            domicilio <- iconv(domicilio,from="UTF-8",to="ASCII//TRANSLIT")
 
-            coordenadas_domicilios <- jsonlite::fromJSON(paste(geocoder_endpoint, URLencode(domicilio),sep=""))
+            coordenadas_domicilios <- jsonlite::fromJSON(paste(geocoder_endpoint, domicilio,sep=""))
             coordenadas_domicilios <- coordenadas_domicilios$Response$View$Result %>% as.data.frame()
 
             if(is.na(domicilio) | is.null(coordenadas_domicilios$Location$DisplayPosition$Longitude[1])){
