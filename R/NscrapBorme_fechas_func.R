@@ -69,7 +69,7 @@ N_lectura_borme_fechas <- function(municipio, radio, provincias, fecha = Sys.Dat
     url_fecha <- paste(url_general,fecha_borme, sep = "")
 
     #Envío JSON a plataforma
-    TB_token <- "iN0N6JZkjAFTg68ytZUF"
+    TB_token <- "oMcl2uoESFgvwLxhRGsk"
     TB_url   <- paste("http://88.99.184.100:8080/api/v1/",TB_token,"/telemetry",sep="")
 
     #Manejo de errores
@@ -575,6 +575,7 @@ N_lectura_borme_fechas <- function(municipio, radio, provincias, fecha = Sys.Dat
 
         #Extracción timestamp en formato unix
         tsi <- format(as.numeric(anytime(fecha_borme))*1000,scientific = F)
+        print(tsi)
         #tsi <- sub("\\..*", "",tsi)
         for(i in 1:nrow(data)){
           ts <- as.numeric(tsi) +i  #Añade i ms al timestamp para poder verse sin solapamiento en el widget de la plataforma smart city.
